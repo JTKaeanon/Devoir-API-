@@ -5,19 +5,22 @@ const CatwaySchema = new Schema({
     catwayNumber: {
         type: Number,
         required: [true, 'Le numéro du catway est requis'],
-        unique: true // Le brief précise que le numéro doit être unique
+        unique: true 
     },
     catwayType: {
         type: String,
-        enum: ['long', 'short'], // Le brief impose ces deux valeurs
-        required: true
+        required: [true, 'Le type de catway est requis'],
+        enum: {
+            values: ['long', 'short'],
+            message: 'Le type doit être soit "long", soit "short"'
+        }
     },
     catwayState: {
-        type: String, // Description de l'état
-        required: true
+        type: String,
+        required: [true, 'La description de l\'état est requise']
     }
 }, {
-    timestamps: true // Ajoute automatiquement createdAt et updatedAt
+    timestamps: true // Ajoute createdAt et updatedAt automatiquement
 });
 
 module.exports = mongoose.model('Catway', CatwaySchema);
