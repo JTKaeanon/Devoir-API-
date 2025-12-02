@@ -1,27 +1,25 @@
-/* --- RESET ET BASE --- */
+/* RESET CSS + FONT */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Inter", sans-serif;
+
 }
 
 body {
     background-color: #f4f6f9;
     color: #333;
-    /* CORRECTION ICI : */
-    /* On s'assure que le body prend toute la hauteur mais ne force pas le centrage */
     display: block;
     height: auto;
     min-height: 100vh;
 }
 
-/* --- STYLE LOGIN (Page de connexion) --- */
-/* On utilise margin pour centrer au lieu du body flex, pour ne pas casser le dashboard */
+/*  LOGIN PAGE */
+
 .login-container {
     max-width: 400px;
     margin: 80px auto;
-    /* 80px du haut, auto pour centrer horizontalement */
     background: white;
     padding: 2rem;
     border-radius: 8px;
@@ -67,25 +65,28 @@ body {
     font-size: 0.9rem;
 }
 
-/* --- STYLE DASHBOARD (Layout global) --- */
+.doc-link i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+
+/* DASHBOARD */
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    /* Prend au moins toute la hauteur de l'écran */
     flex-direction: row;
 }
 
-/* Sidebar (Menu gauche) */
+/* Sidebar */
 .sidebar {
     width: 250px;
     min-width: 250px;
-    /* Force la largeur même si l'écran est petit */
     background-color: #2c3e50;
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    /* Pour que le menu suive le scroll si le contenu est long */
     position: sticky;
     top: 0;
     height: 100vh;
@@ -112,18 +113,15 @@ body {
     display: block;
     padding: 12px;
     border-radius: 4px;
-    transition: background 0.2s;
 }
 
 .sidebar a:hover {
     background-color: #34495e;
 }
-
+/* BOOTSTRAP ICONS */
 .sidebar i {
     margin-right: 10px;
-    /* Espace entre l'icône et le texte */
     font-size: 1.1rem;
-    /* Icône légèrement plus grande */
 }
 
 .logout {
@@ -136,13 +134,11 @@ body {
     background-color: #e74c3c;
 }
 
-/* Contenu Principal (Droite) */
+/* BOX RIGHT */
 .main-content {
     flex: 1;
-    /* Prend tout l'espace restant */
     padding: 40px;
     overflow-y: auto;
-    /* Permet de scroller le contenu si besoin */
 }
 
 .header {
@@ -174,7 +170,7 @@ body {
     margin-top: 5px;
 }
 
-/* Cartes et Conteneurs blancs */
+/* CARD and CONTAINER */
 .card {
     background: white;
     padding: 25px;
@@ -182,7 +178,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* --- TABLEAUX --- */
+/* BOARD */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -211,8 +207,10 @@ tr:hover {
     background-color: #f8f9fa;
 }
 
-/* Boutons d'action */
-.btn-create {
+/* BUTTON */
+
+/* NEW CATWAY and RESERVATION */ 
+.btn-add {
     padding: 10px;
     background: #27ae60;
     color: white;
@@ -221,6 +219,7 @@ tr:hover {
     border-radius: 4px;
 }
 
+/* BUTTON LAYOUT */ 
 .btn-action {
     display: inline-block;
     text-decoration: none;
@@ -233,10 +232,12 @@ tr:hover {
     transition: opacity 0.2s;
 }
 
+/* DETAILS */ 
 .btn-details {
     background-color: #3498db;
 }
 
+/* DELETE */ 
 .btn-delete {
     background-color: #e74c3c;
 }
@@ -244,3 +245,51 @@ tr:hover {
 .btn-action:hover {
     opacity: 0.9;
 }
+
+
+
+/* FORM CREATION */
+
+.card-form {
+    max-width: 600px;
+    
+}
+
+/* ERROR */
+.alert-error {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #fca5a5;
+    font-size: 0.9rem;
+}
+
+/*FORM FIELDS */
+select,
+textarea,
+.form-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white;
+    font-family: inherit;
+}
+
+/* BUTTON SUBMIT */
+.btn-submit {
+    margin-top: 15px;
+    background-color: #27ae60;
+    color: white;
+    width: 100%;
+}
+
+.btn-submit:hover {
+    background-color: #219150;
+}
+
+

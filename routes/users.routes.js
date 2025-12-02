@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../services/user.service');
 
-// 1. Créer un utilisateur (Inscription)
+// Create a user (Registration)
 router.post('/', async (req, res) => {
     try {
         const user = await userService.createUser(req.body);
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// 2. Lister les utilisateurs
+// List all users
 router.get('/', async (req, res) => {
     try {
         const users = await userService.getAllUsers();
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// 3. Récupérer un utilisateur
+// Retrieve  user
 router.get('/:id', async (req, res) => {
     try {
         const user = await userService.getUserById(req.params.id);
@@ -33,7 +33,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// 4. Modifier un utilisateur
+// Edit user
 router.put('/:id', async (req, res) => {
     try {
         const user = await userService.updateUser(req.params.id, req.body);
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// 5. Supprimer un utilisateur
+// Delete user
 router.delete('/:id', async (req, res) => {
     try {
         await userService.deleteUser(req.params.id);

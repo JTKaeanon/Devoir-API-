@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Port de Plaisance Russell - Connexion</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <%- include('partials/head') %>
 </head>
+
 <body>
 
     <div class="login-container">
         <h1>Capitainerie Russell</h1>
-        
+
         <form action="/login" method="POST">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required placeholder="admin@catways.com">
-            
+
             <label for="password">Mot de passe</label>
             <input type="password" id="password" name="password" required placeholder="Votre mot de passe">
-            
+
             <button type="submit">Se connecter</button>
         </form>
 
-        <a href="/documentation" class="doc-link">📖 Accéder à la documentation API</a>
+        <a href="/documentation" class="doc-link"> <i class="bi bi-book"></i>Accéder à la documentation API</a>
     </div>
 
 </body>
+
 </html>

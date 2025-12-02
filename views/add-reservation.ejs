@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidebar') %>
+
+            <main class="main-content">
+                <header class="header">
+                    <h1>Nouvelle Réservation</h1>
+                    <a href="/reservations-page" style="color: #555; text-decoration: none;">
+                        <i class="bi bi-arrow-left"></i> Annuler
+                    </a>
+                </header>
+
+                <div class="card card-form">
+
+                    <div class="card card-form">
+
+                        <% if (locals.error) { %>
+                            <div class="alert-error">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                <%= error %>
+                            </div>
+                            <% } %>
+
+
+                                <form action="/add-reservation" method="POST">
+
+                                    <form action="/add-reservation" method="POST">
+
+                                        <label for="catwayNumber">Choisir le Catway</label>
+                                        <select name="catwayNumber" id="catwayNumber" required>
+                                            <option value="" disabled selected>-- Sélectionnez un emplacement --
+                                            </option>
+
+                                            <% catways.forEach(catway=> { %>
+                                                <option value="<%= catway.catwayNumber %>">
+                                                    Catway n°<%= catway.catwayNumber %> (<%= catway.catwayType %>)
+                                                </option>
+                                                <% }) %>
+                                        </select>
+
+                                        <label for="clientName">Nom du Client</label>
+                                        <input type="text" id="clientName" name="clientName"
+                                            placeholder="Ex: Jean Dupont" required class="form-input">
+
+                                        <label for="boatName">Nom du Bateau</label>
+                                        <input type="text" id="boatName" name="boatName"
+                                            placeholder="Ex: Le Black Pearl" required class="form-input">
+
+                                        <div style="display: flex; gap: 15px;">
+                                            <div style="flex: 1;">
+                                                <label for="startDate">Début</label>
+                                                <input type="date" id="startDate" name="startDate" required
+                                                    class="form-input">
+                                            </div>
+                                            <div style="flex: 1;">
+                                                <label for="endDate">Fin</label>
+                                                <input type="date" id="endDate" name="endDate" required
+                                                    class="form-input">
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn-submit">
+                                            <i class="bi bi-calendar-plus"></i> Enregistrer la réservation
+                                        </button>
+                                    </form>
+                    </div>
+            </main>
+    </div>
+</body>
+
+</html>
