@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidebar') %>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Utilisateurs de la capitainerie</h1>
+                <a href="/add-user" class="btn-add">
+                    <i class="bi bi-person-plus-fill"></i> Nouvel Utilisateur
+                </a>
+            </header>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><strong><%= user.name %></strong></td>
+                                <td><%= user.email %></td>
+                                <td>
+                                    <a href="/users/delete/<%= user._id %>" 
+                                       class="btn-action btn-delete"
+                                       onclick="return confirm('Supprimer cet utilisateur ? Il ne pourra plus se connecter.')">
+                                       <i class="bi bi-trash"></i> Supprimer
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

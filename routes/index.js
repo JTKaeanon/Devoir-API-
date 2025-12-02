@@ -16,12 +16,20 @@ router.post('/login', async (req, res) => {
         const user = await userService.authenticate(email, password);
 
         if (user) {
+            // C'EST ICI QU'ON SAUVEGARDE LE NOM
+            // On crée un cookie nommé 'token' qui contient le nom de l'utilisateur
+            // maxAge: 3600000 = Le cookie dure 1 heure
+            res.cookie('token', user.name, { maxAge: 3600000, httpOnly: true });
+            
             res.redirect('/dashboard');
         } else {
-            res.render('index', { error: 'Invalid credentials' });
+            res.render('index', { 
+                title: 'Port de Plaisance Russell - Connexion',
+                error: 'Email ou mot de passe incorrect' 
+            });
         }
     } catch (error) {
-        res.status(500).send('Server error');
+        res.status(500).send('Erreur serveur');
     }
 });
 
@@ -169,5 +177,79 @@ router.post('/add-reservation', async (req, res) => {
     }
 });
 
+
+/*  USERS  */
+
+// user list
+router.get('/users-page', async (req, res) => {
+    try {
+        const users = await userService.getAllUsers();
+        res.render('users', { 
+            title: 'Gestion des utilisateurs', 
+            users: users 
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Erreur serveur");
+    }
+});
+
+// Creation form (GET)
+router.get('/add-user', (req, res) => {
+    res.render('add-user', { title: 'Nouvel utilisateur' });
+});
+
+// Registration (POST)
+router.post('/add-user', async (req, res) => {
+    try {
+        // auto hash password
+        await userService.createUser(req.body);
+        res.redirect('/users-page');
+    } catch (error) {
+        console.error(error);
+        res.render('add-user', { 
+            title: 'Nouvel utilisateur', 
+            error: 'Erreur : Impossible de créer cet utilisateur (Email déjà pris ?)' 
+        });
+    }
+});
+
+// delete
+router.get('/users/delete/:id', async (req, res) => {
+    try {
+        await userService.deleteUser(req.params.id);
+        res.redirect('/users-page');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Erreur lors de la suppression");
+    }
+});
+
+// Traitement du Login
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await userService.authenticate(email, password);
+
+        if (user) {
+            // SAUVEGARDE DU NOM DANS UN COOKIE (Valable 1 heure)
+            res.cookie('token', user.name, { maxAge: 3600000, httpOnly: true });
+            
+            res.redirect('/dashboard');
+        } else {
+            res.render('index', { error: 'Email ou mot de passe incorrect' });
+        }
+    } catch (error) {
+        res.status(500).send('Erreur serveur');
+    }
+});
+
+
+// Déconnexion
+router.get('/logout', (req, res) => {
+    // On supprime le cookie pour déconnecter la personne
+    res.clearCookie('token');
+    res.redirect('/');
+});
 
 module.exports = router;

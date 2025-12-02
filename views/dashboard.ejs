@@ -18,7 +18,11 @@
                         </p>
                     </div>
                     <div class="user-info">
-                        👤 Capitaine (Admin)
+                        <% if (user) { %>
+                            👤 <%= user %>
+                                <% } else { %>
+                                    👤 Non connecté
+                                    <% } %>
                     </div>
                 </header>
 

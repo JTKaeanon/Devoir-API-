@@ -29,11 +29,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/catways', catwaysRoutes);
 app.use('/users', usersRoutes);
 
-// La route pour l'accueil et le login (doit être en dernier généralement)
-app.use('/', indexRoutes); 
+// Middleware pour rendre le nom de l'utilisateur disponible dans toutes les vues EJS
+app.use((req, res, next) => {
+    // Si le cookie existe, on le met dans une variable locale 'user'
+    if (req.cookies && req.cookies.token) {
+        res.locals.user = req.cookies.token;
+    } else {
+        res.locals.user = null;
+    }
+    next();
+});
+
 
 // Lancement du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
+
+const cookieParser = require('cookie-parser'); // Import
+// ...
+app.use(cookieParser()); // Utilisation (Avant les routes)
+app.use(express.json());
+
+
+
+// La route pour l'accueil et le login (doit être en dernier généralement)
+app.use('/', indexRoutes); 
