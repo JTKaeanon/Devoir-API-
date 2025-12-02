@@ -20,7 +20,7 @@ const CatwaySchema = new Schema({
         required: [true, 'La description de l\'état est requise']
     }
 }, {
-    timestamps: true // Ajoute createdAt et updatedAt automatiquement
+    timestamps: true 
 });
 
 module.exports = mongoose.model('Catway', CatwaySchema);

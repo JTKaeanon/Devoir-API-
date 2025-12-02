@@ -11,5 +11,4 @@ const connectDB = async () => {
   }
 };
 
-// C'EST CETTE LIGNE QUI MANQUE PROBABLEMENT :
 module.exports = connectDB;

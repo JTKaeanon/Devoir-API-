@@ -1,48 +1,33 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-/**
- * Récupérer tous les utilisateurs
- */
+/* Récupérerles utilisateurs */
 exports.getAllUsers = async () => {
-    return await User.find().select('-password'); // On ne renvoie jamais le mot de passe
+    return await User.find().select('-password'); // mdp caché
 };
 
-/**
- * Récupérer un utilisateur par son ID
- */
+/* Récupérer utilisateur par ID */
 exports.getUserById = async (id) => {
     return await User.findById(id).select('-password');
 };
 
-/**
- * Créer un utilisateur
- */
+/* New users */
 exports.createUser = async (userData) => {
     const user = new User(userData);
     return await user.save();
 };
 
-/**
- * Mettre à jour un utilisateur
- */
-exports.updateUser = async (id, userData) => {
-    // Si on modifie le mot de passe, il faudra le re-hasher (géré par le modèle si on save, 
-    // mais ici on utilise findOneAndUpdate, donc attention au hashage manuel si besoin.
-    // Pour simplifier ce devoir, on va supposer qu'on modifie surtout nom/email ici)
-    return await User.findByIdAndUpdate(id, userData, { new: true }).select('-password');
+// Fonction pour modifier un user
+exports.updateUser = async (id, data) => {
+    return await User.findByIdAndUpdate(id, data, { new: true }).select('-password');
 };
 
-/**
- * Supprimer un utilisateur
- */
+/*delete users */
 exports.deleteUser = async (id) => {
     return await User.findByIdAndDelete(id);
 };
 
-/**
- * Vérifier le mot de passe (utile pour le Login plus tard)
- */
+
 exports.authenticate = async (email, password) => {
     const user = await User.findOne({ email });
     if (!user) return null;

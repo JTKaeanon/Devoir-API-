@@ -11,10 +11,10 @@
 
             <main class="main-content">
                 <header class="header">
-                    <h1>📚 Documentation de l'API</h1>
+                    <h1>Documentation de l'API</h1>
                     <div class="user-info">
-                        <% if (locals.user) { %> 👤 <%= user %>
-                                <% } else { %> 👤 Non connecté <% } %>
+                        <% if (locals.user) { %> <i class="bi bi-person-check-fill"></i> <%= user %>
+                                <% } else { %> <i class="bi bi-person-fill-x"></i> Non connecté <% } %>
                     </div>
                 </header>
 
@@ -30,7 +30,7 @@
                 <div>
 
                     <div id="catways" class="doc-section">
-                        <h3>⚓ Ressources Catways</h3>
+                        <h3>Catways</h3>
                         <p style="margin-bottom: 20px; color: #555;">
                             Gestion des emplacements physiques du port (pontons).
                         </p>
@@ -102,7 +102,7 @@
 
 
                     <div id="reservations" class="doc-section">
-                        <h3>📅 Ressources Réservations</h3>
+                        <h3>Réservations</h3>
                         <p style="margin-bottom: 20px; color: #555;">
                             Gestion du planning. Les réservations sont techniquement des sous-ressources des catways.
                         </p>
@@ -155,7 +155,7 @@
 
 
                     <div id="users" class="doc-section">
-                        <h3>👤 Ressources Utilisateurs</h3>
+                        <h3>Utilisateurs</h3>
                         <p style="margin-bottom: 20px; color: #555;">
                             Gestion des accès au tableau de bord (Administrateurs).
                         </p>

@@ -284,7 +284,7 @@ label {
     color: #555;
 }
 
-/* J'ai ajouté 'input' ici pour que tes champs soient jolis partout */
+/* input, select, textarea */
 input,
 select,
 textarea,

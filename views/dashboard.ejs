@@ -13,22 +13,27 @@
             <main class="main-content">
                 <header class="header">
                     <div>
-                        <h1>Tableau de bord</h1>
-                        <p class="date-du-jour">Date du jour : <%= new Date().toLocaleDateString('fr-FR') %>
+                        <h1 style="color: #2c3e50; margin-bottom: 5px;">Tableau de bord</h1>
+ 
+                        <p class="date-du-jour" style="font-style: italic;">
+                            Date du jour : <%= new Date().toLocaleDateString('fr-FR') %>
                         </p>
                     </div>
+                    
                     <div class="user-info">
                         <% if (user) { %>
-                            👤 <%= user %>
-                                <% } else { %>
-                                    👤 Non connecté
-                                    <% } %>
+                            <i class="bi bi-person-check-fill"></i> <%= user %>
+                        <% } else { %>
+                            <i class="bi bi-person-fill-x"></i> Non connecté
+                        <% } %>
                     </div>
                 </header>
 
                 <div class="card">
                     <h3>Bienvenue</h3>
                     <p>Sélectionnez une action dans le menu de gauche pour gérer le port.</p>
+                    <br>
+                    <p><em>Bonne journée !</em></p>
                 </div>
             </main>
     </div>

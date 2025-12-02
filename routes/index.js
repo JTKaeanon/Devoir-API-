@@ -4,31 +4,31 @@ const userService = require('../services/user.service');
 const catwayService = require('../services/catway.service');
 const reservationService = require('../services/reservation.service');
 
-// LOGIN 
+// Login
 router.get('/', (req, res) => {
     res.render('index', { title: 'Login' });
 });
 
-// Login processing
+// process Login
 router.post('/login', async (req, res) => {
+
     try {
         const { email, password } = req.body;
         const user = await userService.authenticate(email, password);
 
         if (user) {
-            // C'EST ICI QU'ON SAUVEGARDE LE NOM
-            // On crée un cookie nommé 'token' qui contient le nom de l'utilisateur
-            // maxAge: 3600000 = Le cookie dure 1 heure
+            // cookie 1h
             res.cookie('token', user.name, { maxAge: 3600000, httpOnly: true });
-            
+            console.log("Connecté en tant que " + user.name);
             res.redirect('/dashboard');
         } else {
-            res.render('index', { 
+            res.render('index', {
                 title: 'Port de Plaisance Russell - Connexion',
-                error: 'Email ou mot de passe incorrect' 
+                error: 'Email ou mot de passe incorrect'
             });
         }
     } catch (error) {
+        console.error(error); // voir erreur dans le terminal
         res.status(500).send('Erreur serveur');
     }
 });
@@ -38,122 +38,117 @@ router.get('/dashboard', (req, res) => {
     res.render('dashboard', { title: 'Dashboard' });
 });
 
-// CATWAYS
+/*    CATWAYS */
 
-// Catways list
+// Liste des catways
 router.get('/catways-page', async (req, res) => {
     try {
-        const catways = await catwayService.getAllCatways();
+        const liste_catways = await catwayService.getAllCatways(); // Changement de nom variable
         res.render('catways', {
-            catways: catways,
+            catways: liste_catways,
             title: 'Catways'
         });
     } catch (error) {
-        res.status(500).send("Error fetching catways");
+        res.status(500).send("Problème récupération catways");
     }
 });
 
-// Catway detail
+// Détail d'un catway
 router.get('/catway-detail/:id', async (req, res) => {
     try {
-        const catway = await catwayService.getCatwayByNumber(req.params.id);
-        if (!catway) return res.status(404).send("Not found");
+        const monCatway = await catwayService.getCatwayByNumber(req.params.id);
+        if (!monCatway) return res.status(404).send("Not found");
 
         res.render('catway-detail', {
-            catway: catway,
-            title: `Catway ${catway.catwayNumber}`
+            catway: monCatway,
+            title: `Catway ${monCatway.catwayNumber}`
         });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).send("Server error");
     }
 });
 
-// Update a catway
+// Update 
 router.post('/catway-detail/:id', async (req, res) => {
     try {
         await catwayService.updateCatway(req.params.id, req.body);
         res.redirect('/catways-page');
     } catch (error) {
-        console.error(error);
+        console.log("Erreur update");
         res.status(500).send("Update error");
     }
 });
 
-// Delete a catway
+// Delete 
 router.post('/catway-detail/:id/delete', async (req, res) => {
     try {
         await catwayService.deleteCatway(req.params.id);
         res.redirect('/catways-page');
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Delete error");
+        res.status(500).send("Impossible de supprimer");
     }
 });
 
-// Add catway form
+// Page formulaire ajout
 router.get('/add-catway', (req, res) => {
-    res.render('add-catway', { title: 'Add Catway' });
+    res.render('add-catway', { title: 'Ajouter un catway' });
 });
 
-// Process add catway
+// Action ajout
 router.post('/add-catway', async (req, res) => {
     try {
         await catwayService.createCatway(req.body);
         res.redirect('/catways-page');
     } catch (error) {
-        console.error(error);
+        // errur numéro existe déjà)
         res.render('add-catway', {
-            title: 'Add Catway',
-            error: 'Duplicate or invalid data'
+            title: 'Ajout Catway',
+            error: 'Erreur : Données invalides ou numéro existant'
         });
     }
 });
 
-//  RESERVATIONS 
+/* RESERVATIONS */
 
-// Reservations list
 router.get('/reservations-page', async (req, res) => {
     try {
-        const reservations = await reservationService.getAllReservations();
+        const allReservations = await reservationService.getAllReservations();
         res.render('reservations', {
-            reservations: reservations,
+            reservations: allReservations,
             title: 'Reservations'
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Server error");
+        res.status(500).send("Erreur serveur");
     }
 });
 
-// Delete reservation
 router.get('/reservations/delete/:id', async (req, res) => {
     try {
         await reservationService.deleteReservation(req.params.id);
         res.redirect('/reservations-page');
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Delete error");
+        console.log(error);
+        res.status(500).send("Erreur delete");
     }
 });
 
-// Add reservation form
 router.get('/add-reservation', async (req, res) => {
     try {
         const catways = await catwayService.getAllCatways();
-        res.render('add-reservation', { 
-            title: 'Add Reservation',
-            catways: catways 
+        res.render('add-reservation', {
+            title: 'Nouvelle Reservation',
+            catways: catways
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Server error");
+        res.status(500).send("Erreur");
     }
 });
 
-// Process add reservation
+// Ajout avec verif dates
 router.post('/add-reservation', async (req, res) => {
     try {
+
         const { catwayNumber, clientName, boatName, startDate, endDate } = req.body;
 
         await reservationService.createReservation(catwayNumber, {
@@ -165,101 +160,70 @@ router.post('/add-reservation', async (req, res) => {
 
         res.redirect('/reservations-page');
     } catch (error) {
-        console.error(error);
-        
-        const catways = await catwayService.getAllCatways();
+        console.log("Erreur réservation : " + error.message);
 
-        res.render('add-reservation', { 
+        const list = await catwayService.getAllCatways();
+
+        res.render('add-reservation', {
             title: 'Add Reservation',
-            catways: catways,
-            error: 'Already reserved'
+            catways: list,
+            error: error.message // erreur de doublon
         });
     }
 });
 
 
-/*  USERS  */
+/* USERS */
 
-// user list
 router.get('/users-page', async (req, res) => {
     try {
         const users = await userService.getAllUsers();
-        res.render('users', { 
-            title: 'Gestion des utilisateurs', 
-            users: users 
+        res.render('users', {
+            title: 'Gestion Users',
+            users: users
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Erreur serveur");
+        res.status(500).send("Erreur");
     }
 });
 
-// Creation form (GET)
 router.get('/add-user', (req, res) => {
     res.render('add-user', { title: 'Nouvel utilisateur' });
 });
 
-// Registration (POST)
 router.post('/add-user', async (req, res) => {
     try {
-        // auto hash password
         await userService.createUser(req.body);
         res.redirect('/users-page');
     } catch (error) {
-        console.error(error);
-        res.render('add-user', { 
-            title: 'Nouvel utilisateur', 
-            error: 'Erreur : Impossible de créer cet utilisateur (Email déjà pris ?)' 
+        res.render('add-user', {
+            title: 'Nouvel utilisateur',
+            error: 'Erreur création user'
         });
     }
 });
 
-// delete
 router.get('/users/delete/:id', async (req, res) => {
     try {
         await userService.deleteUser(req.params.id);
         res.redirect('/users-page');
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Erreur lors de la suppression");
+        res.status(500).send("Erreur");
     }
 });
 
-// Traitement du Login
-router.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await userService.authenticate(email, password);
-
-        if (user) {
-            // SAUVEGARDE DU NOM DANS UN COOKIE (Valable 1 heure)
-            res.cookie('token', user.name, { maxAge: 3600000, httpOnly: true });
-            
-            res.redirect('/dashboard');
-        } else {
-            res.render('index', { error: 'Email ou mot de passe incorrect' });
-        }
-    } catch (error) {
-        res.status(500).send('Erreur serveur');
-    }
-});
-
-// Page de Documentation API
+// Documentation
 router.get('/api-docs', (req, res) => {
-    res.render('api-docs', { 
-        title: 'Documentation API - Russell',
-        // Si tu as besoin de l'utilisateur connecté pour le header
-        user: res.locals.user 
+    res.render('api-docs', {
+        title: 'Doc API',
+        user: res.locals.user
     });
 });
 
-
-// Déconnexion
+// Logout
 router.get('/logout', (req, res) => {
-    // On supprime le cookie pour déconnecter la personne
     res.clearCookie('token');
     res.redirect('/');
 });
-
 
 module.exports = router;
