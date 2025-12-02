@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Russell</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <h2>⚓ Russell Port</h2>
+            <ul>
+                <li><a href="/dashboard">📊 Tableau de bord</a></li>
+                <li><a href="/catways-page">⛵ Liste des Catways</a></li>
+                <li><a href="/reservations-page">📅 Liste des Réservations</a></li>
+                <li><a href="/users-page">👤 Utilisateurs</a></li>
+                <li><a href="/api-docs">📖 Documentation API</a></li>
+                <li><a href="/" class="logout">Déconnexion</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="header">
+                <div>
+                    <h1>Tableau de bord</h1>
+                    <p class="date-du-jour">Date du jour : <%= new Date().toLocaleDateString('fr-FR') %></p>
+                </div>
+                <div class="user-info">
+                    👤 Capitaine (Admin)
+                </div>
+            </header>
+
+            <div class="card">
+                <h3>Bienvenue à la capitainerie</h3>
+                <p>Sélectionnez une action dans le menu de gauche pour gérer le port.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
