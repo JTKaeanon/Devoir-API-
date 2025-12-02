@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/JTKaeanon/Devoir-API-#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "ejs": "^3.1.10",
