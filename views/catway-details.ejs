@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Détail Catway - Russell</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+
+        <%- include('partials/sidebar') %>
+
+            <main class="main-content">
+                <header class="header">
+                    <h1>Détails du Catway n°<%= catway.catwayNumber %>
+                    </h1>
+                    <a href="/catways-page" style="color: #555; text-decoration: none;">← Retour à la liste</a>
+                </header>
+
+                <div class="card" style="max-width: 600px;">
+                    <form action="/catways/<%= catway.catwayNumber %>" method="POST">
+
+                        <label>Numéro de Catway (Fixe)</label>
+                        <input type="text" value="<%= catway.catwayNumber %>" disabled style="background: #eee;">
+
+                        <label>Type (Fixe)</label>
+                        <input type="text" value="<%= catway.catwayType %>" disabled style="background: #eee;">
+
+                        <label for="catwayState">État du catway (Modifiable)</label>
+                        <input type="text" id="catwayState" name="catwayState" value="<%= catway.catwayState %>"
+                            required>
+
+                        <button type="submit" style="margin-top: 10px;">💾 Enregistrer les modifications</button>
+                    </form>
+
+                    <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ddd;">
+
+                    <div style="background: #fff5f5; padding: 15px; border: 1px solid #feb2b2; border-radius: 4px;">
+                        <h4 style="color: #c0392b; margin-bottom: 10px;">Zone de danger</h4>
+                        <p style="margin-bottom: 10px; font-size: 0.9rem;">Une fois supprimé, le catway ne peut plus
+                            être récupéré.</p>
+
+                        <form action="/catways/<%= catway.catwayNumber %>/delete" method="POST"
+                            onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce catway ?');">
+                            <button type="submit" class="btn-delete" style="width: auto;">🗑️ Supprimer ce
+                                Catway</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+    </div>
+</body>
+
+</html>

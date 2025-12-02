@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('../services/user.service');
+const catwayService = require('../services/catway.service');
 
 // Route pour afficher la page d'accueil (Login)
 router.get('/', (req, res) => {
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        
+
         // On utilise le service créé précédemment pour vérifier
         const user = await userService.authenticate(email, password);
 
@@ -33,5 +34,17 @@ router.post('/login', async (req, res) => {
 router.get('/dashboard', (req, res) => {
     res.render('dashboard');
 });
+
+
+// Page : Liste des catways
+router.get('/catways-page', async (req, res) => {
+    try {
+        const catways = await catwayService.getAllCatways();
+        res.render('catways', { catways: catways });
+    } catch (error) {
+        res.status(500).send("Erreur lors de la récupération des catways");
+    }
+});
+
 
 module.exports = router;

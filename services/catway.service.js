@@ -1,9 +1,13 @@
 const Catway = require('../models/catway');
 
 /* get catways */
+
 exports.getAllCatways = async () => {
     try {
-        return await Catway.find();
+        // AJOUT DE .sort({ catwayNumber: 1 })
+        // 1 = Croissant (1, 2, 3...)
+        // -1 = Décroissant (10, 9, 8...)
+        return await Catway.find().sort({ catwayNumber: 1 });
     } catch (error) {
         throw error;
     }
