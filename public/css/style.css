@@ -67,6 +67,11 @@ body {
     font-size: 0.9rem;
 }
 
+.doc-link i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
 /* --- STYLE DASHBOARD (Layout global) --- */
 .dashboard-container {
     display: flex;
@@ -268,14 +273,17 @@ tr:hover {
 
 /* Champs de formulaire (ton .type, mais appliqué à tout) */
 /* On s'assure que les select et textarea ressemblent aux inputs */
-select, textarea, .form-input {
+select,
+textarea,
+.form-input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
-    background-color: white; /* Important pour les select */
+    background-color: white;
+    /* Important pour les select */
     font-family: inherit;
 }
 
@@ -284,9 +292,11 @@ select, textarea, .form-input {
     margin-top: 15px;
     background-color: #27ae60;
     color: white;
-    width: 100%; /* Prend toute la largeur sur mobile */
+    width: 100%;
+    /* Prend toute la largeur sur mobile */
 }
 
 .btn-submit:hover {
-    background-color: #219150; /* Un peu plus foncé au survol */
+    background-color: #219150;
+    /* Un peu plus foncé au survol */
 }

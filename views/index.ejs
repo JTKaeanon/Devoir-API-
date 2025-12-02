@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <%- include('partials/head') %>
 </head>
+
 <body>
 
     <div class="login-container">
         <h1>Capitainerie Russell</h1>
-        
+
         <form action="/login" method="POST">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required placeholder="admin@catways.com">
-            
+
             <label for="password">Mot de passe</label>
             <input type="password" id="password" name="password" required placeholder="Votre mot de passe">
-            
+
             <button type="submit">Se connecter</button>
         </form>
 
-        <a href="/documentation" class="doc-link bi-book"> Accéder à la documentation API</a>
+        <a href="/documentation" class="doc-link"> <i class="bi bi-book"></i>Accéder à la documentation API</a>
     </div>
 
 </body>
+
 </html>
