@@ -244,6 +244,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Page de Documentation API
+router.get('/api-docs', (req, res) => {
+    res.render('api-docs', { 
+        title: 'Documentation API - Russell',
+        // Si tu as besoin de l'utilisateur connecté pour le header
+        user: res.locals.user 
+    });
+});
+
 
 // Déconnexion
 router.get('/logout', (req, res) => {
@@ -251,5 +260,6 @@ router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 });
+
 
 module.exports = router;
