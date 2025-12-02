@@ -7,198 +7,200 @@
 
 <body>
     <div class="dashboard-container">
-        <%- include('partials/sidebar') %>
+        <% if (locals.user) { %>
+            <%- include('partials/sidebar') %>
+        <% } %>
 
-            <main class="main-content">
-                <header class="header">
-                    <h1>Documentation de l'API</h1>
-                    <div class="user-info">
-                        <% if (locals.user) { %> <i class="bi bi-person-check-fill"></i> <%= user %>
-                                <% } else { %> <i class="bi bi-person-fill-x"></i> Non connecté <% } %>
-                    </div>
-                </header>
+        <main class="main-content">
+            <header class="header">
+                <h1>Documentation de l'API</h1>
+                <div class="user-info">
+                    <% if (locals.user) { %> 
+                        <i class="bi bi-person-check-fill"></i> <%= user %>
+                    <% } else { %> 
+                        <a href="/" style="text-decoration: none; color: #333; font-weight: bold;">
+                            <i class="bi bi-box-arrow-in-right"></i> Se connecter
+                        </a>
+                    <% } %>
+                </div>
+            </header>
 
-                <div class="card" style="margin-bottom: 40px;">
-                    <h3>Introduction</h3>
-                    <p style="margin-top: 10px; margin-bottom: 20px; color: #666;">
-                        Bienvenue sur la documentation de l'API <strong>Port de Plaisance
-                            Russell </strong>.
+            <div class="card" style="margin-bottom: 40px;">
+                <h3>Introduction</h3>
+                <p style="margin-top: 10px; margin-bottom: 20px; color: #666;">
+                    Bienvenue sur la documentation de l'API <strong>Port de Plaisance Russell</strong>.
+                </p>
+
+            
+            </div>
+
+            <div>
+
+                <div id="catways" class="doc-section">
+                    <h3>Catways</h3>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        Gestion des emplacements physiques du port (pontons).
                     </p>
 
-                </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <span class="endpoint">/catways</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Récupère la liste complète des catways triée par numéro.
+                        </div>
+                    </div>
 
-                <div>
-
-                    <div id="catways" class="doc-section">
-                        <h3>Catways</h3>
-                        <p style="margin-bottom: 20px; color: #555;">
-                            Gestion des emplacements physiques du port (pontons).
-                        </p>
-
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method get">GET</span>
-                                <span class="endpoint">/catways</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Récupère la liste complète des catways triée par numéro.
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <span class="endpoint">/catways/:id</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Récupère un catway spécifique.
+                            <div class="params-box">
+                                <span class="code-label">Paramètres URL</span>
+                                :id (Number) - Le numéro du catway
                             </div>
                         </div>
+                    </div>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method get">GET</span>
-                                <span class="endpoint">/catways/:id</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Récupère un catway spécifique.
-                                <div class="params-box">
-                                    <span class="code-label">Paramètres URL</span>
-                                    :id (Number) - Le numéro du catway
-                                </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method post">POST</span>
+                            <span class="endpoint">/catways</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Crée un nouvel emplacement.
+                            <div class="params-box">
+                                <span class="code-label">Body (JSON)</span>
+                                { "catwayNumber": 10, "catwayType": "long", "catwayState": "Bon état" }
                             </div>
                         </div>
+                    </div>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method post">POST</span>
-                                <span class="endpoint">/catways</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Crée un nouvel emplacement.
-                                <div class="params-box">
-                                    <span class="code-label">Body (JSON)</span>
-                                    { "catwayNumber": 10, "catwayType": "long", "catwayState": "Bon état" }
-                                </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method put">PUT</span>
+                            <span class="endpoint">/catways/:id</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Met à jour la description de l'état d'un catway.
+                            <div class="params-box">
+                                <span class="code-label">Body (JSON)</span>
+                                { "catwayState": "En maintenance pour peinture" }
                             </div>
                         </div>
+                    </div>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method put">PUT</span>
-                                <span class="endpoint">/catways/:id</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Met à jour la description de l'état d'un catway.
-                                <div class="params-box">
-                                    <span class="code-label">Body (JSON)</span>
-                                    { "catwayState": "En maintenance pour peinture" }
-                                </div>
-                            </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method delete">DELETE</span>
+                            <span class="endpoint">/catways/:id</span>
                         </div>
-
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method delete">DELETE</span>
-                                <span class="endpoint">/catways/:id</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Supprime un catway de la base de données.
-                            </div>
+                        <div class="endpoint-body">
+                            Supprime un catway de la base de données.
                         </div>
-
-
                     </div>
 
 
-                    <div id="reservations" class="doc-section">
-                        <h3>Réservations</h3>
-                        <p style="margin-bottom: 20px; color: #555;">
-                            Gestion du planning. Les réservations sont techniquement des sous-ressources des catways.
-                        </p>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method get">GET</span>
-                                <span class="endpoint">/catways/:id/reservations</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Liste les réservations d'un catway.
+                <div id="reservations" class="doc-section">
+                    <h3>Réservations</h3>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        Gestion du planning. Les réservations sont techniquement des sous-ressources des catways.
+                    </p>
+
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <span class="endpoint">/catways/:id/reservations</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Liste les réservations d'un catway.
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method post">POST</span>
+                            <span class="endpoint">/catways/:id/reservations</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Ajoute une réservation (Vérifie automatiquement les doublons de dates).
+                            <div class="params-box">
+                                <span class="code-label">Body (JSON)</span>
+                                {
+                                "clientName": "Jean Dupont",
+                                "boatName": "Titanic",
+                                "startDate": "2024-05-20",
+                                "endDate": "2024-05-25"
+                                }
                             </div>
                         </div>
+                    </div>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method post">POST</span>
-                                <span class="endpoint">/catways/:id/reservations</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Ajoute une réservation (Vérifie automatiquement les doublons de dates).
-                                <div class="params-box">
-                                    <span class="code-label">Body (JSON)</span>
-                                    {
-                                    "clientName": "Jean Dupont",
-                                    "boatName": "Titanic",
-                                    "startDate": "2024-05-20",
-                                    "endDate": "2024-05-25"
-                                    }
-                                </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method delete">DELETE</span>
+                            <span class="endpoint">/catways/:id/reservations/:idResa</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Supprime une réservation.
+                            <div class="params-box">
+                                <span class="code-label">Paramètres URL</span>
+                                :id (Catway), :idResa (ID unique MongoDB de la réservation)
                             </div>
                         </div>
-
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method delete">DELETE</span>
-                                <span class="endpoint">/catways/:id/reservations/:idResa</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Supprime une réservation.
-                                <div class="params-box">
-                                    <span class="code-label">Paramètres URL</span>
-                                    :id (Catway), :idResa (ID unique MongoDB de la réservation)
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
 
 
-                    <div id="users" class="doc-section">
-                        <h3>Utilisateurs</h3>
-                        <p style="margin-bottom: 20px; color: #555;">
-                            Gestion des accès au tableau de bord (Administrateurs).
-                        </p>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method get">GET</span>
-                                <span class="endpoint">/users</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Liste tous les utilisateurs enregistrés (sauf mots de passe).
+                <div id="users" class="doc-section">
+                    <h3>Utilisateurs</h3>
+                    <p style="margin-bottom: 20px; color: #555;">
+                        Gestion des accès au tableau de bord (Administrateurs).
+                    </p>
+
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method get">GET</span>
+                            <span class="endpoint">/users</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Liste tous les utilisateurs enregistrés (sauf mots de passe).
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method post">POST</span>
+                            <span class="endpoint">/users</span>
+                        </div>
+                        <div class="endpoint-body">
+                            Crée un compte Admin. Le mot de passe est hashé automatiquement.
+                            <div class="params-box">
+                                <span class="code-label">Body (JSON)</span>
+                                { "name": "Admin", "email": "admin@mail.com", "password": "SecretPassword" }
                             </div>
                         </div>
+                    </div>
 
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method post">POST</span>
-                                <span class="endpoint">/users</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Crée un compte Admin. Le mot de passe est hashé automatiquement.
-                                <div class="params-box">
-                                    <span class="code-label">Body (JSON)</span>
-                                    { "name": "Admin", "email": "admin@mail.com", "password": "SecretPassword" }
-                                </div>
-                            </div>
+                    <div class="endpoint-card">
+                        <div class="endpoint-header">
+                            <span class="method delete">DELETE</span>
+                            <span class="endpoint">/users/:id</span>
                         </div>
-
-                        <div class="endpoint-card">
-                            <div class="endpoint-header">
-                                <span class="method delete">DELETE</span>
-                                <span class="endpoint">/users/:id</span>
-                            </div>
-                            <div class="endpoint-body">
-                                Supprime un compte utilisateur.
-                            </div>
+                        <div class="endpoint-body">
+                            Supprime un compte utilisateur.
                         </div>
-
-
                     </div>
 
                 </div>
-            </main>
+
+            </div>
+        </main>
     </div>
 </body>
 
