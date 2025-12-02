@@ -5,7 +5,7 @@ const catwayService = require('../services/catway.service');
 
 // Route pour afficher la page d'accueil (Login)
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { title: 'Port de Plaisance Russell - Connexion ' });
 });
 
 
@@ -86,6 +86,27 @@ router.post('/catway-detail/:id/delete', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("Erreur lors de la suppression");
+    }
+});
+
+
+// Formulaire de création (GET)
+router.get('/add-catway', (req, res) => {
+    res.render('add-catway', { title: 'Ajouter un catway' });
+});
+
+// Traitement du formulaire (POST)
+router.post('/add-catway', async (req, res) => {
+    try {
+        await catwayService.createCatway(req.body);
+        res.redirect('/catways-page'); // Succès : retour à la liste
+    } catch (error) {
+        console.error(error);
+        // En cas d'erreur (ex: numéro déjà pris), on réaffiche le formulaire avec un message
+        res.render('add-catway', { 
+            title: 'Ajouter un catway',
+            error: 'Erreur : Le numéro existe peut-être déjà ou les données sont invalides.'
+        });
     }
 });
 

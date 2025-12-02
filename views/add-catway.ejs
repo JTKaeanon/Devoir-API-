@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidebar') %>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Nouveau Catway</h1>
+                <a href="/catways-page" style="color: #555; text-decoration: none;">
+                    <i class="bi bi-arrow-left"></i> Annuler
+                </a>
+            </header>
+
+            <div class="card card-form">
+                
+                <% if (locals.error) { %>
+                    <div class="alert-error">
+                        <i class="bi bi-exclamation-circle"></i> <%= error %>
+                    </div>
+                <% } %>
+
+                <form action="/add-catway" method="POST">
+                    
+                    <label for="catwayNumber">Numéro du Catway</label>
+                    <input type="number" id="catwayNumber" name="catwayNumber" placeholder="Ex: 25" required class="form-input">
+
+                    <label for="catwayType">Type</label>
+                    <select name="catwayType" id="catwayType">
+                        <option value="long">Long</option>
+                        <option value="short">Short</option>
+                    </select>
+
+                    <label for="catwayState">Description de l'état</label>
+                    <textarea id="catwayState" name="catwayState" rows="3" required placeholder="Ex: Bon état, besoin de peinture..."></textarea>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-plus-circle"></i> Créer le Catway
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

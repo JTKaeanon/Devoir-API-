@@ -244,3 +244,49 @@ tr:hover {
 .btn-action:hover {
     opacity: 0.9;
 }
+
+
+
+/* --- Styles pour les Formulaires de création --- */
+
+/* Pour limiter la largeur du formulaire (ton .card-new) */
+.card-form {
+    max-width: 600px;
+    /* On garde le style de base .card et on ajoute juste la limite de largeur */
+}
+
+/* Message d'erreur (ton .error) */
+.alert-error {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #fca5a5;
+    font-size: 0.9rem;
+}
+
+/* Champs de formulaire (ton .type, mais appliqué à tout) */
+/* On s'assure que les select et textarea ressemblent aux inputs */
+select, textarea, .form-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white; /* Important pour les select */
+    font-family: inherit;
+}
+
+/* Bouton de validation (ton .btn-submit) */
+.btn-submit {
+    margin-top: 15px;
+    background-color: #27ae60;
+    color: white;
+    width: 100%; /* Prend toute la largeur sur mobile */
+}
+
+.btn-submit:hover {
+    background-color: #219150; /* Un peu plus foncé au survol */
+}
