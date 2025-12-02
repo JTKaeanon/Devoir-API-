@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const path = require('path');
+const cookieParser = require('cookie-parser'); // 1. IMPORT ICI (en haut)
 
 // Import des routes
 const catwaysRoutes = require('./routes/catways.routes');
@@ -17,21 +18,21 @@ const app = express();
 
 // Configuration du moteur de vue EJS
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware pour traiter les données
+// --- MIDDLEWARES (L'ORDRE EST CRUCIAL ICI) ---
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// --- DÉCLARATION DES ROUTES ---
-// Les routes spécifiques (API)
-app.use('/catways', catwaysRoutes);
-app.use('/users', usersRoutes);
+// 2. ACTIVATION DE COOKIE PARSER (AVANT de l'utiliser)
+app.use(cookieParser()); 
 
-// Middleware pour rendre le nom de l'utilisateur disponible dans toutes les vues EJS
+// 3. MIDDLEWARE UTILISATEUR (Placé APRES cookie-parser)
 app.use((req, res, next) => {
-    // Si le cookie existe, on le met dans une variable locale 'user'
+    // Petit log pour vérifier dans la console si ça marche
+    // console.log("🍪 Cookie détecté :", req.cookies.token); 
+
     if (req.cookies && req.cookies.token) {
         res.locals.user = req.cookies.token;
     } else {
@@ -40,19 +41,13 @@ app.use((req, res, next) => {
     next();
 });
 
+// --- DÉCLARATION DES ROUTES (EN DERNIER) ---
+app.use('/catways', catwaysRoutes);
+app.use('/users', usersRoutes);
+app.use('/', indexRoutes); // La route d'accueil en dernier
 
 // Lancement du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
-
-const cookieParser = require('cookie-parser'); // Import
-// ...
-app.use(cookieParser()); // Utilisation (Avant les routes)
-app.use(express.json());
-
-
-
-// La route pour l'accueil et le login (doit être en dernier généralement)
-app.use('/', indexRoutes); 
