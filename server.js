@@ -1,23 +1,23 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-require('dotenv').config();
+const catwaysRoutes = require('./routes/catways.routes'); 
+
+dotenv.config();
+connectDB();
 
 const app = express();
 
-// Connexion à la DB
-connectDB();
-
-// Middleware pour traiter les données JSON et les formulaires
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route de test simple
+app.use('/catways', catwaysRoutes);
+
 app.get('/', (req, res) => {
-    res.send('API Catways est en ligne !');
+    res.send('API Catways fonctionnelle !');
 });
 
-// Lancement du serveur
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Serveur lancé sur le port ${PORT}`);
+    console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
 });
