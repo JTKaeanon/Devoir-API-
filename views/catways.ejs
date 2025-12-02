@@ -2,11 +2,7 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Liste des Catways - Russell</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    <%- include('partials/head') %>
 </head>
 
 <script>
@@ -21,9 +17,7 @@
             <main class="main-content">
                 <header class="header">
                     <h1>Gestion des Catways</h1>
-                    <a href="/catways/create"
-                        style="padding: 10px; background: #27ae60; color: white; text-decoration: none; border-radius: 4px;">+
-                        Nouveau Catway</a>
+                    <a href="/catways/create" class="btn-create">+ Nouveau Catway</a>
                 </header>
 
                 <div class="card">
@@ -49,9 +43,9 @@
                                         <%= catway.catwayState %>
                                     </td>
                                     <td>
-                                        <a href="/catways/<%= catway.catwayNumber %>"
+                                        <a href="/catway-detail/<%= catway.catwayNumber %>"
                                             class="btn-action btn-details">Détails
-                                            / Modifier</a>
+                                            / Modifier </a>
                                     </td>
                                 </tr>
                                 <% }) %>

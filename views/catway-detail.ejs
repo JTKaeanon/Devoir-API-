@@ -2,9 +2,7 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Détail Catway - Russell</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <%- include('partials/head') %>
 </head>
 
 <body>
@@ -20,7 +18,7 @@
                 </header>
 
                 <div class="card" style="max-width: 600px;">
-                    <form action="/catways/<%= catway.catwayNumber %>" method="POST">
+                    <form action="/catway-detail/<%= catway.catwayNumber %>" method="POST">
 
                         <label>Numéro de Catway (Fixe)</label>
                         <input type="text" value="<%= catway.catwayNumber %>" disabled style="background: #eee;">
@@ -42,7 +40,7 @@
                         <p style="margin-bottom: 10px; font-size: 0.9rem;">Une fois supprimé, le catway ne peut plus
                             être récupéré.</p>
 
-                        <form action="/catways/<%= catway.catwayNumber %>/delete" method="POST"
+                        <form action="/catway-detail/<%= catway.catwayNumber %>/delete" method="POST"
                             onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce catway ?');">
                             <button type="submit" class="btn-delete" style="width: auto;">🗑️ Supprimer ce
                                 Catway</button>
