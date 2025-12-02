@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const catwayService = require('../services/catway.service');
-const reservationService = require('../services/reservation.service');
+const reservationService = require('../services/reservation.service.js');
 
 // 1. Lister tous les catways
 router.get('/', async (req, res) => {

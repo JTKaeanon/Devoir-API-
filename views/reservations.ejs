@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <%- include('partials/sidebar') %>
+
+            <main class="main-content">
+
+                <header class="header">
+
+                    <h1>Liste des Réservations</h1>
+
+                    <a href="/add-reservation"
+                        class="btn-add">
+                        <i class="bi bi-plus-lg"></i> Nouvelle Réservation
+                    </a>
+
+
+                </header>
+
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Catway</th>
+                                <th>Client</th>
+                                <th>Bateau</th>
+                                <th>Début</th>
+                                <th>Fin</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (reservations.length===0) { %>
+                                <tr>
+                                    <td colspan="6" style="text-align:center; color:#777;">Aucune réservation
+                                        enregistrée.</td>
+                                </tr>
+                                <% } else { %>
+                                    <% reservations.forEach(res=> { %>
+                                        <tr>
+                                            <td><strong>n°<%= res.catwayNumber %></strong></td>
+                                            <td>
+                                                <%= res.clientName %>
+                                            </td>
+                                            <td>
+                                                <%= res.boatName %>
+                                            </td>
+                                            <td>
+                                                <%= new Date(res.startDate).toLocaleDateString('fr-FR') %>
+                                            </td>
+                                            <td>
+                                                <%= new Date(res.endDate).toLocaleDateString('fr-FR') %>
+                                            </td>
+                                            <td>
+                                                <a href="/reservations/delete/<%= res._id %>"
+                                                    class="btn-action btn-delete"
+                                                    onclick="return confirm('Supprimer cette réservation ?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+    </div>
+</body>
+
+</html>
