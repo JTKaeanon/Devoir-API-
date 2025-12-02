@@ -1,17 +1,17 @@
-require('dotenv').config(); // Important pour récupérer l'URI de la base
+require('dotenv').config();
 const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
-// Import des modèles
+// Import  modèles
 const Catway = require('../models/catway');
 const Reservation = require('../models/reservation');
 const connectDB = require('../config/db');
 
-// Connexion à la DB
+// Connexion  DB
 connectDB();
 
-// Lire les fichiers JSON
+// read  fichiers JSON
 const catwaysData = JSON.parse(
     fs.readFileSync(path.join(__dirname, '../data/catways.json'), 'utf-8')
 );
@@ -19,18 +19,16 @@ const reservationsData = JSON.parse(
     fs.readFileSync(path.join(__dirname, '../data/reservations.json'), 'utf-8')
 );
 
-// Fonction d'import
+// import
 const importData = async () => {
     try {
-        // Optionnel : On vide la base avant d'importer pour éviter les doublons
-        await Catway.deleteMany();
-        await Reservation.deleteMany();
-        console.log('🗑️  Données existantes supprimées...');
+        // await Catway.deleteMany();
+        // wait Reservation.deleteMany();
+        // console.log(' Données existantes supprimées...');
 
-        // Insertion des nouvelles données
         await Catway.create(catwaysData);
         await Reservation.create(reservationsData);
-        
+
         console.log('✅ Données importées avec succès !');
         process.exit();
     } catch (error) {

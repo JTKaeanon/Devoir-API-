@@ -22,19 +22,16 @@ const UserSchema = new Schema({
     timestamps: true
 });
 
-// Middleware : Hachage du mot de passe avant la sauvegarde
+// hachage du mot de passe avant sauvegarde
 UserSchema.pre('save', async function() {
-    // Note : On a retiré le paramètre "next" dans la parenthèse du function()
 
-    // Si le mot de passe n'a pas été modifié, on arrête là
     if (!this.isModified('password')) return;
 
     try {
         const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
-        // Plus besoin d'appeler next(), Mongoose gère ça tout seul avec le async/await
     } catch (error) {
-        throw error; // On lance l'erreur directement
+        throw error; // error
     }
 });
 
