@@ -217,7 +217,7 @@ tr:hover {
 }
 
 /* Boutons d'action */
-.btn-create {
+.btn-add {
     padding: 10px;
     background: #27ae60;
     color: white;
@@ -300,3 +300,5 @@ textarea,
     background-color: #219150;
     /* Un peu plus foncé au survol */
 }
+
+
