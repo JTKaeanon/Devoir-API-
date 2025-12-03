@@ -17,10 +17,12 @@ exports.getReservationById = async (idReservation) => {
     }
 };
 
-// récupérer (trié par date)
+/**
+*récupérer (trié par date) */
 exports.getAllReservations = async () => {
     try {
-        // plus vieux au plus récent
+        /**
+*plus vieux au plus récent*/
         return await Reservation.find().sort({ startDate: 1 });
     } catch (error) {
         throw error;
@@ -35,7 +37,7 @@ exports.deleteReservation = async (idReservation) => {
     }
 };
 
-/* vérification de chevauchement  */
+/** vérification de chevauchement  */
 exports.createReservation = async (catwayNumber, reservationData) => {
     try {
         const catway = await Catway.findOne({ catwayNumber: catwayNumber });
@@ -54,16 +56,18 @@ exports.createReservation = async (catwayNumber, reservationData) => {
             const date_debut_existante = new Date(resa.startDate);
             const date_fin_existante = new Date(resa.endDate);
 
-            // Logique de chevauchement :
-            // nouveau début AVANT la fin existante
-            // ET nouvelle fin  APRÈS le début existant
-            // Pas possible
+            /**  
+             * Logique de chevauchement :
+             *nouveau début AVANT la fin existante
+             *ET nouvelle fin  APRÈS le début existant
+             *Pas possible 
+             */
             if (debut <= date_fin_existante && fin >= date_debut_existante) {
 
                 throw new Error(`Impossible : Le catway est déjà pris du ${date_debut_existante.toLocaleDateString()} au ${date_fin_existante.toLocaleDateString()}`);
             }
         }
-        
+
         reservationData.catwayNumber = catwayNumber;
         const reservation = new Reservation(reservationData);
         return await reservation.save();

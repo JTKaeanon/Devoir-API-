@@ -1,4 +1,6 @@
-/* RESET CSS + FONT */
+/**
+* RESET CSS + FONT 
+*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,7 +21,9 @@ a {
     
 }
 
-/* LOGIN PAGE */
+/**
+* LOGIN PAGE 
+*/
 
 .login-container {
     max-width: 400px;
@@ -75,14 +79,18 @@ a {
 }
 
 
-/* DASHBOARD */
+/**
+* DASHBOARD 
+*/
 .dashboard-container {
     display: flex;
     min-height: 100vh;
     flex-direction: row;
 }
 
-/* Sidebar */
+/**
+* Sidebar 
+*/
 .sidebar {
     width: 250px;
     min-width: 250px;
@@ -123,7 +131,9 @@ a {
     background-color: #34495e;
 }
 
-/* BOOTSTRAP ICONS */
+/**
+* BOOTSTRAP ICONS 
+*/
 .sidebar i {
     margin-right: 10px;
     font-size: 1.1rem;
@@ -139,7 +149,9 @@ a {
     background-color: #e74c3c;
 }
 
-/* BOX RIGHT */
+/**
+* BOX RIGHT 
+*/
 .main-content {
     flex: 1;
     padding: 40px;
@@ -175,7 +187,9 @@ a {
     margin-top: 5px;
 }
 
-/* CARD and CONTAINER */
+/**
+* CARD and CONTAINER 
+*/
 .card {
     background: white;
     padding: 25px;
@@ -183,7 +197,9 @@ a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* BOARD */
+/**
+* BOARD 
+*/
 table {
     width: 100%;
     border-collapse: collapse;
@@ -212,9 +228,13 @@ tr:hover {
     background-color: #f8f9fa;
 }
 
-/* BUTTON */
+/**
+* BUTTON 
+*/
 
-/* NEW CATWAY - RESERVATION - USER */
+/**
+* NEW CATWAY - RESERVATION - USER 
+*/
 .btn-add {
     padding: 10px;
     background: #27ae60;
@@ -224,7 +244,9 @@ tr:hover {
     border-radius: 4px;
 }
 
-/* BUTTON LAYOUT */
+/**
+* BUTTON LAYOUT 
+*/
 .btn-action {
     display: inline-block;
     text-decoration: none;
@@ -239,12 +261,16 @@ tr:hover {
     border: none;
 }
 
-/* DETAILS */
+/**
+* DETAILS 
+*/
 .btn-details {
     background-color: #3498db;
 }
 
-/* DELETE */
+/**
+* DELETE 
+*/
 .btn-delete {
     background-color: #e74c3c;
 }
@@ -255,14 +281,18 @@ tr:hover {
 
 
 
-/* FORM CREATION */
+/**
+* FORM CREATION 
+*/
 
 .card-form {
     max-width: 600px;
 
 }
 
-/* ERROR */
+/**
+* ERROR 
+*/
 .alert-error {
     background: #fee2e2;
     color: #b91c1c;
@@ -276,7 +306,8 @@ tr:hover {
     gap: 10px;
 }
 
-/*FORM FIELDS */
+/*FORM FIELDS 
+*/
 label {
     display: block;
     margin-top: 15px;
@@ -284,7 +315,9 @@ label {
     color: #555;
 }
 
-/* input, select, textarea */
+/**
+* input, select, textarea 
+*/
 input,
 select,
 textarea,
@@ -306,7 +339,9 @@ textarea:focus {
     outline: none;
 }
 
-/* BUTTON SUBMIT */
+/**
+* BUTTON SUBMIT 
+*/
 .btn-submit {
     margin-top: 15px;
     background-color: #27ae60;
@@ -323,7 +358,9 @@ textarea:focus {
     background-color: #219150;
 }
 
-/* DOCUMENTATION API */
+/**
+* DOCUMENTATION API 
+*/
 .doc-section { 
     margin-bottom: 40px; 
 }

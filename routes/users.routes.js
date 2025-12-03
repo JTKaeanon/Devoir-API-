@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const userService = require('../services/user.service');
 
-// Create a user (Registration)
+/**
+*Create a user (Registration)
+*/
 router.post('/', async (req, res) => {
     try {
         const user = await userService.createUser(req.body);
@@ -12,7 +14,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// List all users
+/**
+*List all users
+*/
 router.get('/', async (req, res) => {
     try {
         const users = await userService.getAllUsers();
@@ -22,7 +26,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Retrieve  user
+/**
+*Retrieve  user
+*/
 router.get('/:id', async (req, res) => {
     try {
         const user = await userService.getUserById(req.params.id);
@@ -33,7 +39,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Edit user
+/**
+*Edit user
+*/
 router.put('/:id', async (req, res) => {
     try {
         const user = await userService.updateUser(req.params.id, req.body);
@@ -43,7 +51,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Delete user
+/**
+*Delete user
+*/
 router.delete('/:id', async (req, res) => {
     try {
         await userService.deleteUser(req.params.id);
