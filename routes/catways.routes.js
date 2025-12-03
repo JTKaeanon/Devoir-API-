@@ -3,7 +3,10 @@ const router = express.Router();
 const catwayService = require('../services/catway.service');
 const reservationService = require('../services/reservation.service.js');
 
-// List  catways
+/**
+* List  catways 
+/**
+* */
 router.get('/', async (req, res) => {
     try {
         const catways = await catwayService.getAllCatways();
@@ -13,7 +16,9 @@ router.get('/', async (req, res) => {
     }
 });
 
-// catway by ID
+/**
+* catway by ID
+*/
 router.get('/:id', async (req, res) => {
     try {
         const catway = await catwayService.getCatwayByNumber(req.params.id);
@@ -26,7 +31,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Create catway
+/**
+* Create catway
+*/
 router.post('/', async (req, res) => {
     try {
         const newCatway = await catwayService.createCatway(req.body);
@@ -36,7 +43,9 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update catway
+/**
+* Update catway
+*/
 router.put('/:id', async (req, res) => {
     try {
         const updatedCatway = await catwayService.updateCatway(req.params.id, req.body);
@@ -49,7 +58,9 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-// Delete catway
+/**
+* Delete catway
+*/
 router.delete('/:id', async (req, res) => {
     try {
         await catwayService.deleteCatway(req.params.id);
@@ -59,7 +70,9 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// List reservations 
+/**
+* List reservations 
+*/
 router.get('/:id/reservations', async (req, res) => {
     try {
         const reservations = await reservationService.getReservationsByCatway(req.params.id);
@@ -69,7 +82,9 @@ router.get('/:id/reservations', async (req, res) => {
     }
 });
 
-// reservation by ID
+/**
+* reservation by ID
+*/
 router.get('/:id/reservations/:idReservation', async (req, res) => {
     try {
         const reservation = await reservationService.getReservationById(req.params.idReservation);
@@ -82,7 +97,9 @@ router.get('/:id/reservations/:idReservation', async (req, res) => {
     }
 });
 
-// Create reservation 
+/**
+* Create reservation 
+*/
 router.post('/:id/reservations', async (req, res) => {
     try {
         const newReservation = await reservationService.createReservation(req.params.id, req.body);
@@ -92,7 +109,9 @@ router.post('/:id/reservations', async (req, res) => {
     }
 });
 
-//  Delete reservation
+/**
+*  Delete reservation
+*/
 router.delete('/:id/reservations/:idReservation', async (req, res) => {
     try {
         await reservationService.deleteReservation(req.params.idReservation);

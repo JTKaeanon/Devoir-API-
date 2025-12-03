@@ -4,14 +4,15 @@ const Catway = require('../models/catway');
 
 exports.getAllCatways = async () => {
     try {
-        // 1 = croissant / -1 = décroissant
+        /**
+*1 = croissant / -1 = décroissant */
         return await Catway.find().sort({ catwayNumber: 1 });
     } catch (error) {
         throw error;
     }
 };
 
-/*(catwayNumber) */
+/**(catwayNumber) */
 exports.getCatwayByNumber = async (catwayNumber) => {
     try {
         return await Catway.findOne({ catwayNumber: catwayNumber });
@@ -20,7 +21,7 @@ exports.getCatwayByNumber = async (catwayNumber) => {
     }
 };
 
-/* nouveau catway */
+/**  nouveau catway */
 exports.createCatway = async (catwayData) => {
     try {
         const catway = new Catway(catwayData);
@@ -30,7 +31,7 @@ exports.createCatway = async (catwayData) => {
     }
 };
 
-/* update catway */
+/**  update catway */
 exports.updateCatway = async (catwayNumber, catwayData) => {
     try {
     
@@ -44,7 +45,7 @@ exports.updateCatway = async (catwayNumber, catwayData) => {
     }
 };
 
-/* Supprimer  catway */
+/** Supprimer  catway */
 exports.deleteCatway = async (catwayNumber) => {
     try {
         return await Catway.findOneAndDelete({ catwayNumber: catwayNumber });

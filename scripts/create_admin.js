@@ -12,7 +12,8 @@ const createAdmin = async () => {
         const admin = new User({
             name: 'Capitaine',
             email: 'admin@russell.com',
-            password: 'password123' // hashé automatiquement
+            password: 'password123' /**
+            * hashé automatiquement */
         });
 
         await admin.save();

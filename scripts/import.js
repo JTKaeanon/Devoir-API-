@@ -3,15 +3,19 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 
-// Import  modèles
+/**
+*Import  modèles */
+
 const Catway = require('../models/catway');
 const Reservation = require('../models/reservation');
 const connectDB = require('../config/db');
 
-// Connexion  DB
+/**
+*Connexion  DB*/
 connectDB();
 
-// read  fichiers JSON
+/**
+*read  fichiers JSON*/
 const catwaysData = JSON.parse(
     fs.readFileSync(path.join(__dirname, '../data/catways.json'), 'utf-8')
 );
@@ -19,10 +23,11 @@ const reservationsData = JSON.parse(
     fs.readFileSync(path.join(__dirname, '../data/reservations.json'), 'utf-8')
 );
 
-// import
+/**
+*import*/
 const importData = async () => {
     try {
-        // await Catway.deleteMany();
+        // await Catway.deleteMany(); 
         // wait Reservation.deleteMany();
         // console.log(' Données existantes supprimées...');
 
@@ -37,5 +42,6 @@ const importData = async () => {
     }
 };
 
-// Lancer l'import
+/**
+*Lancer l'import*/
 importData();

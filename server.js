@@ -4,19 +4,25 @@ const connectDB = require('./config/db');
 const path = require('path');
 const cookieParser = require('cookie-parser'); 
 
-// Import 
+/**
+*Import 
+*/
 const catwaysRoutes = require('./routes/catways.routes');
 const usersRoutes = require('./routes/users.routes');
 const indexRoutes = require('./routes/index'); 
 
 dotenv.config();
 
-// connexion db
+/**
+*connexion db 
+*/
 connectDB();
 
 const app = express();
 
-// Config EJS
+/**
+*Config EJS 
+*/
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -40,12 +46,16 @@ app.use((req, res, next) => {
     next();
 });
 
-// déclaration routes
+/**
+*déclaration routes 
+*/
 app.use('/catways', catwaysRoutes);
 app.use('/users', usersRoutes);
 app.use('/', indexRoutes); 
 
-// server 
+/**
+*server 
+*/
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Serveur lancé sur http://localhost:${PORT}`);

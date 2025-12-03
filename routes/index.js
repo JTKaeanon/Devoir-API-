@@ -4,12 +4,16 @@ const userService = require('../services/user.service');
 const catwayService = require('../services/catway.service');
 const reservationService = require('../services/reservation.service');
 
-// Login
+/**
+* Login
+*/
 router.get('/', (req, res) => {
     res.render('index', { title: 'Login' });
 });
 
-// process Login
+/**
+* process Login
+*/
 router.post('/login', async (req, res) => {
 
     try {
@@ -17,7 +21,9 @@ router.post('/login', async (req, res) => {
         const user = await userService.authenticate(email, password);
 
         if (user) {
-            // cookie 1h
+            /**
+* cookie 1h
+            */
             res.cookie('token', user.name, { maxAge: 3600000, httpOnly: true });
             console.log("Connecté en tant que " + user.name);
             res.redirect('/dashboard');
@@ -28,22 +34,32 @@ router.post('/login', async (req, res) => {
             });
         }
     } catch (error) {
-        console.error(error); // voir erreur dans le terminal
+        console.error(error); /**
+* voir erreur dans le terminal
+        */
         res.status(500).send('Erreur serveur');
     }
 });
 
-// DASHBOARD
+/**
+* DASHBOARD
+*/
 router.get('/dashboard', (req, res) => {
     res.render('dashboard', { title: 'Dashboard' });
 });
 
-/*    CATWAYS */
+/**     
+ * *CATWAYS 
+*/
 
-// Liste des catways
+/**
+* Liste des catways 
+*/
 router.get('/catways-page', async (req, res) => {
     try {
-        const liste_catways = await catwayService.getAllCatways(); // Changement de nom variable
+        const liste_catways = await catwayService.getAllCatways(); /**
+* Changement de nom variable
+        */
         res.render('catways', {
             catways: liste_catways,
             title: 'Catways'
@@ -53,7 +69,9 @@ router.get('/catways-page', async (req, res) => {
     }
 });
 
-// Détail d'un catway
+/**
+* Détail d'un catway
+*/
 router.get('/catway-detail/:id', async (req, res) => {
     try {
         const monCatway = await catwayService.getCatwayByNumber(req.params.id);
@@ -69,7 +87,8 @@ router.get('/catway-detail/:id', async (req, res) => {
     }
 });
 
-// Update 
+/**
+* Update */
 router.post('/catway-detail/:id', async (req, res) => {
     try {
         await catwayService.updateCatway(req.params.id, req.body);
@@ -80,7 +99,9 @@ router.post('/catway-detail/:id', async (req, res) => {
     }
 });
 
-// Delete 
+/**
+* Delete 
+*/
 router.post('/catway-detail/:id/delete', async (req, res) => {
     try {
         await catwayService.deleteCatway(req.params.id);
@@ -90,18 +111,24 @@ router.post('/catway-detail/:id/delete', async (req, res) => {
     }
 });
 
-// Page formulaire ajout
+/**
+* Page formulaire ajout
+*/
 router.get('/add-catway', (req, res) => {
     res.render('add-catway', { title: 'Ajouter un catway' });
 });
 
-// Action ajout
+/**
+* Action ajout
+*/
 router.post('/add-catway', async (req, res) => {
     try {
         await catwayService.createCatway(req.body);
         res.redirect('/catways-page');
     } catch (error) {
-        // errur numéro existe déjà)
+        /**
+* errur numéro existe déjà) 
+        */
         res.render('add-catway', {
             title: 'Ajout Catway',
             error: 'Erreur : Données invalides ou numéro existant'
@@ -109,7 +136,9 @@ router.post('/add-catway', async (req, res) => {
     }
 });
 
-/* RESERVATIONS */
+/** *
+ * RESERVATIONS 
+*/
 
 router.get('/reservations-page', async (req, res) => {
     try {
@@ -145,7 +174,9 @@ router.get('/add-reservation', async (req, res) => {
     }
 });
 
-// Ajout avec verif dates
+/**
+* Ajout avec verif dates
+*/
 router.post('/add-reservation', async (req, res) => {
     try {
 
@@ -167,13 +198,17 @@ router.post('/add-reservation', async (req, res) => {
         res.render('add-reservation', {
             title: 'Add Reservation',
             catways: list,
-            error: error.message // erreur de doublon
+            error: error.message /**
+* erreur de doublon
+            */
         });
     }
 });
 
 
-/* USERS */
+/** 
+ * USERS 
+*/
 
 router.get('/users-page', async (req, res) => {
     try {
@@ -212,7 +247,9 @@ router.get('/users/delete/:id', async (req, res) => {
     }
 });
 
-// Documentation
+/**
+* Documentation
+*/
 router.get('/api-docs', (req, res) => {
     res.render('api-docs', {
         title: 'Doc API',
@@ -220,7 +257,9 @@ router.get('/api-docs', (req, res) => {
     });
 });
 
-// Logout
+/**
+* Logout
+*/
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
